@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  /* Background layers (OLED defaults) */
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+
+  /* Text hierarchy */
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+
+  /* Accent (user-configurable in premium) */
+  --accent: var(--user-accent, #667eea);
+  --accent-gradient: linear-gradient(135deg, #667eea, #764ba2);
+
+  /* Borders */
+  --border: #222222;
+  --border-active: #333333;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Night mode filter classes */
+.night-mode main {
+  filter: sepia(100%) hue-rotate(-30deg) saturate(200%) brightness(0.6);
+  transition: filter 500ms ease;
+}
+
+.night-mode-inactive main {
+  filter: none;
+  transition: filter 500ms ease-in-out;
+}
+
+/* Widget container performance isolation */
+.widget-container {
+  contain: layout style paint;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--bg-secondary);
+}
