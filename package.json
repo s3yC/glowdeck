@@ -11,7 +11,8 @@
     "electron:dev": "next build && electron .",
     "electron:build": "next build && electron-builder --config electron/electron-builder.config.js",
     "electron:build:win": "npm run electron:build -- --win",
-    "electron:build:mac": "npm run electron:build -- --mac"
+    "electron:build:mac": "npm run electron:build -- --mac",
+    "deploy": "echo 'Deploy handled by Cloudflare Pages'"
   },
   "dependencies": {
     "idb-keyval": "^6.2.2",
