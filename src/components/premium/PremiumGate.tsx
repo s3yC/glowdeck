@@ -15,9 +15,12 @@ function getBenefitText(widgetType: WidgetType): string {
     youtube: 'Watch videos right on your dashboard',
     music: 'Play music without leaving your dashboard',
     stocks: 'Track your portfolio in real-time',
-    iframe: 'Embed any website on your dashboard',
     'photo-frame': 'Display your favorite photos in a slideshow',
     pomodoro: 'Stay focused with timed work sessions',
+    'cpu-usage': 'Monitor CPU utilization in real-time',
+    'memory-usage': 'Track JavaScript heap memory usage',
+    'storage-usage': 'View browser storage quota and usage',
+    'eth-usage': 'Monitor network throughput and requests',
   };
   return benefits[widgetType] ?? 'Unlock this widget with GlowDeck PRO';
 }

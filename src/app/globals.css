@@ -113,6 +113,11 @@ body {
   border-color: var(--text-muted) !important;
 }
 
+/* Widget toolbar — hidden by default */
+.widget-toolbar {
+  display: none;
+}
+
 /* Widget container hover micro-interaction — pointer devices only */
 @media (hover: hover) {
   .widget-container {
@@ -124,6 +129,30 @@ body {
   .widget-container:hover {
     border-color: rgba(102, 126, 234, 0.3);
     box-shadow: var(--glow-accent);
+  }
+
+  /* Hover toolbar — top-right pill, fade in on hover */
+  .widget-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 15;
+    padding: 2px 4px;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms var(--ease-smooth);
+  }
+
+  .widget-container:hover > .widget-toolbar {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

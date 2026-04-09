@@ -29,7 +29,7 @@ const workWidgets: Widget[] = [
   { id: 'work-calendar', type: 'calendar', title: 'Calendar', tier: 'free',    config: { source: 'built-in' }, position: { x: 8, y: 0 }, size: { w: 4, h: 4 } },
   { id: 'work-stocks',   type: 'stocks',   title: 'Stocks',   tier: 'premium', config: { symbols: ['AAPL', 'GOOGL'], chartType: 'mini', pollInterval: 60000 }, position: { x: 0, y: 2 }, size: { w: 8, h: 2 } },
   { id: 'work-pomodoro', type: 'pomodoro', title: 'Pomodoro', tier: 'premium', config: { workMinutes: 25, breakMinutes: 5, longBreakMinutes: 15, sessionsBeforeLongBreak: 4 }, position: { x: 0, y: 4 }, size: { w: 4, h: 2 } },
-  { id: 'work-iframe',   type: 'iframe',   title: 'Web View', tier: 'premium', config: { url: '', title: 'Custom Widget' }, position: { x: 4, y: 4 }, size: { w: 8, h: 2 } },
+  { id: 'work-countdown', type: 'countdown', title: 'Countdown', tier: 'free', config: { targetDate: '', label: 'Deadline' }, position: { x: 4, y: 4 }, size: { w: 8, h: 2 } },
 ];
 
 const focusWidgets: Widget[] = [

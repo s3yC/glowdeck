@@ -19,16 +19,20 @@ export const PERSIST_DEBOUNCE_MS = 500;
 
 // Grid
 export const GRID_COLS = 12;
+export const GRID_ROWS = 6;
 export const GRID_MARGIN: [number, number] = [8, 8];
 export const GRID_PADDING: [number, number] = [8, 8];
+export const HEADER_HEIGHT = 48;
 
 // Widget tier arrays
 export const FREE_WIDGET_TYPES = [
   'clock', 'date', 'calendar', 'weather', 'countdown', 'quote',
+  'alarm-clock', 'wifi-usage',
 ] as const;
 
 export const PREMIUM_WIDGET_TYPES = [
-  'youtube', 'music', 'stocks', 'iframe', 'photo-frame', 'pomodoro',
+  'youtube', 'music', 'stocks', 'photo-frame', 'pomodoro',
+  'cpu-usage', 'memory-usage', 'storage-usage', 'eth-usage',
 ] as const;
 
 // CSP whitelist
