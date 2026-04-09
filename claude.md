@@ -143,3 +143,11 @@ frame-src 'self'
 - Widget Plugin Architecture: every widget is a self-contained React component with a standard interface
 - Maximum 8 simultaneous iframes in any layout to prevent memory issues
 - All iframe sources must be explicitly whitelisted in CSP
+
+## Version & Deployment
+
+- **Current Version:** 0.1.0
+- **PWA Deployment:** Vercel (static export via `next build` with `output: 'export'`)
+- **Desktop Deployment:** Electron (Windows NSIS installer, macOS DMG) via electron-builder
+- **Auto-Updates:** electron-updater pulling from GitHub Releases
+- **Testing:** Vitest + Testing Library (64 unit tests covering core business logic)

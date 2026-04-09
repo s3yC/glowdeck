@@ -53,4 +53,29 @@
 - [x] Empty state for dashboard (centered + icon + subtitle)
 - [x] Night mode vignette overlay + smoother 800ms transition
 - [x] prefers-reduced-motion support
-- [ ] Phase Gate: show homepage in browser
+- [x] Phase Gate: show homepage in browser — APPROVED
+- [x] Additional UX: widget toolbar, inline settings, new widgets, remove iframe/wifi/storage
+- [x] Additional UX: reset loads defaults, clear button, empty state text fix
+
+## Phase 5: Trigger — 2026-04-08
+- [x] Testing setup: Vitest + Testing Library + jsdom
+- [x] Unit tests: widgetRegistry (registry entries, getRegistryEntry, getWidgetsByTier)
+- [x] Unit tests: CSP (allowlist enforcement, malformed URLs, CSP string generation)
+- [x] Unit tests: premiumStore (trial lifecycle, feature gating, upgrade prompt throttling)
+- [x] Unit tests: layoutStore (spaces CRUD, widget add/remove/config merge)
+- [x] Unit tests: constants (value assertions, tier array completeness)
+- [x] Test results: 64 tests passed, 5 test files, 0 failures
+- [x] PWA: manifest.json (standalone, landscape, OLED black theme)
+- [x] PWA: service worker (cache-first static, network-first API)
+- [x] PWA: SVG + PNG icons (192px, 512px)
+- [x] PWA: service worker registration hook
+- [x] PWA: Apple Web App meta configuration
+- [x] Electron: main.ts (BrowserWindow, security, powerSaveBlocker, tray, kiosk, CSP, auto-updater)
+- [x] Electron: preload.ts (contextBridge API)
+- [x] Electron: electron-builder.config.js (NSIS + DMG, GitHub Releases)
+- [x] Electron: TypeScript declarations (window.glowdeck)
+- [x] Electron: build scripts in package.json
+- [x] README.md with features, installation, tech stack, project structure
+- [x] claude.md updated with v0.1.0 and deployment notes
+- [x] Final build verification: npm run build passes clean
+- [x] Final test verification: npm test passes (64/64)
