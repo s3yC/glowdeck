@@ -18,6 +18,36 @@
   /* Borders */
   --border: #222222;
   --border-active: #333333;
+
+  /* Glow effects */
+  --glow-accent: 0 0 20px rgba(102, 126, 234, 0.15);
+  --glow-accent-strong: 0 0 30px rgba(102, 126, 234, 0.25);
+  --glow-pro: 0 0 20px rgba(118, 75, 162, 0.2);
+
+  /* Shadows */
+  --shadow-widget: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-widget-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  /* Border radius scale */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 500ms;
 }
 
 html,
@@ -41,12 +71,27 @@ body {
 /* Night mode filter classes */
 .night-mode main {
   filter: sepia(100%) hue-rotate(-30deg) saturate(200%) brightness(0.6);
-  transition: filter 500ms ease;
+  transition: filter 800ms ease-in-out;
 }
 
 .night-mode-inactive main {
   filter: none;
-  transition: filter 500ms ease-in-out;
+  transition: filter 800ms ease-in-out;
+}
+
+/* Night mode vignette overlay */
+.night-mode .night-vignette {
+  opacity: 1;
+}
+
+.night-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+  opacity: 0;
+  transition: opacity 800ms ease-in-out;
 }
 
 /* Widget container performance isolation */
@@ -55,4 +100,171 @@ body {
   overflow: hidden;
   border-radius: 0.75rem;
   background: var(--bg-secondary);
+}
+
+/* react-grid-layout overrides for OLED theme */
+.react-grid-item.react-grid-placeholder {
+  background: var(--accent) !important;
+  opacity: 0.15 !important;
+  border-radius: 0.75rem;
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  border-color: var(--text-muted) !important;
+}
+
+/* Widget container hover micro-interaction — pointer devices only */
+@media (hover: hover) {
+  .widget-container {
+    border: 1px solid transparent;
+    transition: border-color var(--duration-normal) var(--ease-smooth),
+                box-shadow var(--duration-normal) var(--ease-smooth);
+  }
+
+  .widget-container:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: var(--glow-accent);
+  }
+}
+
+/* PRO badge shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.pro-badge-shimmer {
+  background: linear-gradient(
+    90deg,
+    #667eea 0%,
+    #a78bfa 25%,
+    #764ba2 50%,
+    #a78bfa 75%,
+    #667eea 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Ambient background mesh */
+@keyframes ambient-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.ambient-bg::before,
+.ambient-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.ambient-bg::before {
+  width: 80vmax;
+  height: 80vmax;
+  top: -30%;
+  left: -20%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.04) 0%, transparent 70%);
+  animation: ambient-rotate 60s linear infinite;
+}
+
+.ambient-bg::after {
+  width: 70vmax;
+  height: 70vmax;
+  bottom: -30%;
+  right: -20%;
+  background: radial-gradient(circle, rgba(118, 75, 162, 0.035) 0%, transparent 70%);
+  animation: ambient-rotate 60s linear infinite reverse;
+}
+
+/* Onboarding staggered fade-in */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.onboarding-fade-in {
+  animation: fade-in-up 400ms var(--ease-smooth) both;
+}
+
+.onboarding-fade-in-delay-1 {
+  animation: fade-in-up 400ms var(--ease-smooth) 100ms both;
+}
+
+.onboarding-fade-in-delay-2 {
+  animation: fade-in-up 400ms var(--ease-smooth) 200ms both;
+}
+
+.onboarding-fade-in-delay-3 {
+  animation: fade-in-up 400ms var(--ease-smooth) 300ms both;
+}
+
+/* Active step indicator pulse */
+@keyframes step-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
+  50% { box-shadow: 0 0 0 4px rgba(102, 126, 234, 0); }
+}
+
+.step-dot-active {
+  animation: step-pulse 2s ease-in-out infinite;
+}
+
+/* CTA glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(102, 126, 234, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(102, 126, 234, 0.5); }
+}
+
+.cta-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Empty state pulsing icon */
+@keyframes empty-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.empty-state-pulse {
+  animation: empty-pulse 2.5s ease-in-out infinite;
+}
+
+/* Widget picker card hover — pointer devices only */
+@media (hover: hover) {
+  .widget-picker-card {
+    transition: transform var(--duration-normal) var(--ease-smooth),
+                border-color var(--duration-normal) var(--ease-smooth),
+                box-shadow var(--duration-normal) var(--ease-smooth);
+  }
+
+  .widget-picker-card:hover {
+    transform: scale(1.02);
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: var(--glow-accent);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -45,7 +45,7 @@ export function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
-          transition: 'opacity 300ms ease',
+          transition: 'opacity 350ms ease 50ms',
         }}
         onClick={onClose}
       />
@@ -61,7 +61,9 @@ export function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
           WebkitBackdropFilter: 'blur(12px)',
           borderLeft: '1px solid var(--border)',
           transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 300ms ease',
+          transition: isOpen
+            ? 'transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)'
+            : 'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         {/* Header */}

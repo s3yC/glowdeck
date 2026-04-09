@@ -34,7 +34,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="h-screen w-screen bg-black overflow-hidden">
+    <main className="h-screen w-screen bg-black overflow-hidden relative">
+      {/* Ambient background mesh — subtle depth for OLED */}
+      <div className="ambient-bg" aria-hidden="true" />
+
+      {/* Night mode vignette overlay */}
+      <div className="night-vignette" aria-hidden="true" />
+
       {/* Onboarding wizard (conditional on first visit) */}
       <OnboardingWizard />
 

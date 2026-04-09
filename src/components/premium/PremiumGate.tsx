@@ -57,10 +57,7 @@ export function PremiumGate({
       <div className="relative z-10 flex flex-col items-center justify-center gap-3 p-4 text-center">
         {/* PRO badge */}
         <span
-          className="px-3 py-1 rounded-full text-xs font-bold text-white"
-          style={{
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
-          }}
+          className="pro-badge-shimmer px-3 py-1 rounded-full text-xs font-bold text-white"
         >
           PRO
         </span>

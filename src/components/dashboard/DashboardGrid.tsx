@@ -125,6 +125,52 @@ export function DashboardGrid({ onUpgrade }: DashboardGridProps) {
     return null;
   }
 
+  // Empty state when no widgets in the active space
+  if (widgets.length === 0) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center gap-4"
+        style={{
+          height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+          color: 'var(--text-secondary)',
+        }}
+      >
+        {/* Pulsing + icon */}
+        <div className="empty-state-pulse">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+        </div>
+        <div className="text-center">
+          <p
+            className="text-base font-medium mb-1"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Your dashboard is empty
+          </p>
+          <p
+            className="text-sm"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Open settings to add your first widget
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <GridLayout
       className="dashboard-grid"

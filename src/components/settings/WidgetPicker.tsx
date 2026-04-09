@@ -49,7 +49,7 @@ export function WidgetPicker({ onClose }: WidgetPickerProps) {
             <button
               key={entry.type}
               onClick={() => handleAddWidget(entry)}
-              className="flex flex-col items-start gap-1.5 p-3 rounded-xl text-left transition-colors"
+              className="widget-picker-card flex flex-col items-start gap-1.5 p-3 rounded-xl text-left cursor-pointer"
               style={{
                 backgroundColor: 'var(--bg-tertiary)',
                 border: '1px solid var(--border)',
@@ -65,10 +65,7 @@ export function WidgetPicker({ onClose }: WidgetPickerProps) {
                 </span>
                 {isPremiumWidget && (
                   <span
-                    className="px-1.5 py-0.5 text-[10px] font-bold rounded-full text-white flex-shrink-0"
-                    style={{
-                      background: 'linear-gradient(135deg, #667eea, #764ba2)',
-                    }}
+                    className="pro-badge-shimmer px-1.5 py-0.5 text-[10px] font-bold rounded-full text-white flex-shrink-0"
                   >
                     PRO
                   </span>

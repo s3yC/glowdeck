@@ -90,7 +90,7 @@ export function OnboardingWizard() {
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-2 h-2 rounded-full transition-all"
+              className={`w-2 h-2 rounded-full transition-all ${i === step ? 'step-dot-active' : ''}`}
               style={{
                 backgroundColor:
                   i === step ? 'var(--accent)' : 'var(--bg-tertiary)',
@@ -110,21 +110,21 @@ export function OnboardingWizard() {
         >
           {/* Step 0: Choose your vibe */}
           {step === 0 && (
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col" key="step-0">
               <h2
-                className="text-2xl font-bold text-center mb-2"
+                className="onboarding-fade-in text-2xl font-bold text-center mb-2"
                 style={{ color: 'var(--text-primary)' }}
               >
                 Choose your vibe
               </h2>
               <p
-                className="text-sm text-center mb-6"
+                className="onboarding-fade-in-delay-1 text-sm text-center mb-6"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Pick a starting Space for your dashboard
               </p>
 
-              <div className="space-y-3 flex-1">
+              <div className="onboarding-fade-in-delay-2 space-y-3 flex-1">
                 {SPACE_OPTIONS.map((space) => (
                   <button
                     key={space.id}
@@ -164,15 +164,15 @@ export function OnboardingWizard() {
 
           {/* Step 1: Pick your widgets */}
           {step === 1 && (
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col" key="step-1">
               <h2
-                className="text-2xl font-bold text-center mb-2"
+                className="onboarding-fade-in text-2xl font-bold text-center mb-2"
                 style={{ color: 'var(--text-primary)' }}
               >
                 Pick your widgets
               </h2>
               <p
-                className="text-sm text-center mb-6"
+                className="onboarding-fade-in-delay-1 text-sm text-center mb-6"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Your {SPACE_OPTIONS.find((s) => s.id === selectedSpace)?.name}{' '}
@@ -181,7 +181,7 @@ export function OnboardingWizard() {
               </p>
 
               <div
-                className="flex-1 flex flex-col items-center justify-center gap-4 p-6 rounded-xl"
+                className="onboarding-fade-in-delay-2 flex-1 flex flex-col items-center justify-center gap-4 p-6 rounded-xl"
                 style={{
                   backgroundColor: 'var(--bg-tertiary)',
                   border: '1px dashed var(--border)',
@@ -218,21 +218,21 @@ export function OnboardingWizard() {
 
           {/* Step 2: Start your free trial */}
           {step === 2 && (
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col" key="step-2">
               <h2
-                className="text-2xl font-bold text-center mb-2"
+                className="onboarding-fade-in text-2xl font-bold text-center mb-2"
                 style={{ color: 'var(--text-primary)' }}
               >
                 Start your free trial
               </h2>
               <p
-                className="text-sm text-center mb-6"
+                className="onboarding-fade-in-delay-1 text-sm text-center mb-6"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Get 21 days of full premium access -- no payment required
               </p>
 
-              <ul className="space-y-4 flex-1">
+              <ul className="onboarding-fade-in-delay-2 space-y-4 flex-1">
                 {TRIAL_BENEFITS.map((benefit) => (
                   <li key={benefit} className="flex items-start gap-3">
                     <span
@@ -280,7 +280,7 @@ export function OnboardingWizard() {
           {step < 2 ? (
             <button
               onClick={handleNext}
-              className="px-6 py-2.5 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90"
+              className="px-6 py-2.5 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90 cursor-pointer"
               style={{
                 background: 'linear-gradient(135deg, #667eea, #764ba2)',
               }}
@@ -290,7 +290,7 @@ export function OnboardingWizard() {
           ) : (
             <button
               onClick={handleFinish}
-              className="px-6 py-2.5 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90"
+              className="cta-glow px-6 py-2.5 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90 cursor-pointer"
               style={{
                 background: 'linear-gradient(135deg, #667eea, #764ba2)',
               }}
