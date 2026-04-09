@@ -1,0 +1,6 @@
+name = "glowdeck"
+compatibility_date = "2026-04-09"
+
+# Serve static assets from Next.js export
+[assets]
+directory = "./out"
