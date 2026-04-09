@@ -15,7 +15,7 @@ interface WidgetContainerProps {
 }
 
 export function WidgetContainer({ widget, onUpgrade }: WidgetContainerProps) {
-  const registryEntry = widgetRegistry[widget.type];
+  const registryEntry = widgetRegistry[widget.type as keyof typeof widgetRegistry];
   const canAccessFeature = usePremiumStore((s) => s.canAccessFeature);
   const canAccess = canAccessFeature(widget.tier);
   const activeSpaceId = usePreferenceStore((s) => s.activeSpaceId);
@@ -23,6 +23,11 @@ export function WidgetContainer({ widget, onUpgrade }: WidgetContainerProps) {
   const removeWidget = useLayoutStore((s) => s.removeWidget);
 
   const [showSettings, setShowSettings] = useState(false);
+
+  // Skip rendering if widget type was removed from registry
+  if (!registryEntry) {
+    return null;
+  }
 
   const Component = registryEntry.component;
 

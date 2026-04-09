@@ -39,8 +39,8 @@ export function DashboardGrid({ onUpgrade, onOpenSettings }: DashboardGridProps)
   // Track iframe count
   const iframeCount = useMemo(() => {
     return widgets.filter((w) => {
-      const entry = widgetRegistry[w.type];
-      return entry.maxIframes && entry.maxIframes > 0;
+      const entry = widgetRegistry[w.type as keyof typeof widgetRegistry];
+      return entry?.maxIframes && entry.maxIframes > 0;
     }).length;
   }, [widgets]);
 
@@ -81,8 +81,8 @@ export function DashboardGrid({ onUpgrade, onOpenSettings }: DashboardGridProps)
   // Build RGL layout from widgets
   const layout: Layout = useMemo(
     () =>
-      widgets.map((widget) => {
-        const entry = widgetRegistry[widget.type];
+      widgets.filter((w) => widgetRegistry[w.type as keyof typeof widgetRegistry]).map((widget) => {
+        const entry = widgetRegistry[widget.type as keyof typeof widgetRegistry]!;
         return {
           i: widget.id,
           x: widget.position.x,
@@ -161,13 +161,19 @@ export function DashboardGrid({ onUpgrade, onOpenSettings }: DashboardGridProps)
         </button>
         <div className="text-center">
           <p
-            className="text-base font-medium mb-1"
+            className="text-lg font-semibold mb-1"
             style={{ color: 'var(--text-primary)' }}
           >
-            Your dashboard is empty
+            Your GlowDeck is empty
           </p>
           <p
-            className="text-sm"
+            className="text-sm mb-3"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Display your Tech with GlowDeck
+          </p>
+          <p
+            className="text-xs"
             style={{ color: 'var(--text-muted)' }}
           >
             Open settings to add your first widget
@@ -197,7 +203,7 @@ export function DashboardGrid({ onUpgrade, onOpenSettings }: DashboardGridProps)
       layout={layout}
       onLayoutChange={handleLayoutChange}
     >
-      {widgets.map((widget) => (
+      {widgets.filter((w) => widgetRegistry[w.type as keyof typeof widgetRegistry]).map((widget) => (
         <div key={widget.id}>
           <WidgetContainer widget={widget} onUpgrade={onUpgrade} />
         </div>

@@ -39,6 +39,13 @@ const focusWidgets: Widget[] = [
   { id: 'focus-music',    type: 'music',    title: 'Music',    tier: 'premium', config: { spotifyUrl: '', theme: 'dark' }, position: { x: 6, y: 4 }, size: { w: 6, h: 2 } },
 ];
 
+// Exported so SpaceSwitcher can use it for "Reset to Default"
+export const defaultWidgetsBySpaceId: Record<string, Widget[]> = {
+  home: homeWidgets,
+  work: workWidgets,
+  focus: focusWidgets,
+};
+
 const defaultSpaces: Space[] = [
   {
     id: 'home',

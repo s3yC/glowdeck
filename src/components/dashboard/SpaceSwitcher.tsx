@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useLayoutStore, usePreferenceStore, usePremiumStore } from '@/stores';
+import { defaultWidgetsBySpaceId } from '@/stores/layoutStore';
 import type { GridConfig } from '@/types';
 import { GRID_COLS, GRID_MARGIN, GRID_PADDING } from '@/lib/constants';
 
@@ -22,6 +23,7 @@ export function SpaceSwitcher({ onOpenSettings }: SpaceSwitcherProps) {
   const isPremium = canAccessPremium('premium');
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showSavedToast, setShowSavedToast] = useState(false);
 
   const handleSwitchSpace = (spaceId: string) => {
@@ -57,9 +59,19 @@ export function SpaceSwitcher({ onOpenSettings }: SpaceSwitcherProps) {
   };
 
   const confirmResetSpace = () => {
-    // Reset to empty widgets for the active space
-    updateSpace(activeSpaceId, { widgets: [] });
+    // Reset to default widgets for this space (or empty if no defaults exist)
+    const defaults = defaultWidgetsBySpaceId[activeSpaceId] ?? [];
+    updateSpace(activeSpaceId, { widgets: [...defaults] });
     setShowResetConfirm(false);
+  };
+
+  const handleClearSpace = () => {
+    setShowClearConfirm(true);
+  };
+
+  const confirmClearSpace = () => {
+    updateSpace(activeSpaceId, { widgets: [] });
+    setShowClearConfirm(false);
   };
 
   const handleSaveLayout = () => {
@@ -146,6 +158,27 @@ export function SpaceSwitcher({ onOpenSettings }: SpaceSwitcherProps) {
           </svg>
         </button>
 
+        {/* Clear Space */}
+        <button
+          onClick={handleClearSpace}
+          className="flex items-center justify-center w-8 h-8 rounded-md transition-colors"
+          style={{ color: 'var(--text-muted)' }}
+          title="Clear Space"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+            e.currentTarget.style.color = 'var(--text-secondary)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = 'var(--text-muted)';
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          </svg>
+        </button>
+
         {/* Save Layout */}
         <button
           onClick={handleSaveLayout}
@@ -203,10 +236,10 @@ export function SpaceSwitcher({ onOpenSettings }: SpaceSwitcherProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-base font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
-              Reset Space?
+              Load Defaults?
             </h3>
             <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
-              Are you sure? This will reset all widgets to defaults.
+              Are you sure? This will replace all current widgets with the default layout for this space.
             </p>
             <div className="flex gap-2 justify-end">
               <button
@@ -222,6 +255,44 @@ export function SpaceSwitcher({ onOpenSettings }: SpaceSwitcherProps) {
                 style={{ color: '#fff', backgroundColor: '#ef4444' }}
               >
                 Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Clear confirmation dialog */}
+      {showClearConfirm && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}
+          onClick={() => setShowClearConfirm(false)}
+        >
+          <div
+            className="rounded-xl p-6 max-w-sm mx-4"
+            style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-base font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
+              Clear Space?
+            </h3>
+            <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+              Are you sure? This will remove all widgets from this space.
+            </p>
+            <div className="flex gap-2 justify-end">
+              <button
+                onClick={() => setShowClearConfirm(false)}
+                className="px-4 py-2 rounded-lg text-sm"
+                style={{ color: 'var(--text-secondary)', backgroundColor: 'var(--bg-tertiary)' }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmClearSpace}
+                className="px-4 py-2 rounded-lg text-sm font-medium"
+                style={{ color: '#fff', backgroundColor: '#ef4444' }}
+              >
+                Clear
               </button>
             </div>
           </div>
