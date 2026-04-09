@@ -19,9 +19,10 @@ import 'react-grid-layout/css/styles.css';
 
 interface DashboardGridProps {
   onUpgrade: () => void;
+  onOpenSettings?: () => void;
 }
 
-export function DashboardGrid({ onUpgrade }: DashboardGridProps) {
+export function DashboardGrid({ onUpgrade, onOpenSettings }: DashboardGridProps) {
   const activeSpaceId = usePreferenceStore((s) => s.activeSpaceId);
   const spaces = useLayoutStore((s) => s.spaces);
   const updateWidgetPosition = useLayoutStore((s) => s.updateWidgetPosition);
@@ -136,7 +137,12 @@ export function DashboardGrid({ onUpgrade }: DashboardGridProps) {
         }}
       >
         {/* Pulsing + icon */}
-        <div className="empty-state-pulse">
+        <button
+          className="empty-state-pulse cursor-pointer transition-transform hover:scale-110"
+          onClick={onOpenSettings}
+          aria-label="Open settings to add a widget"
+          style={{ background: 'none', border: 'none', padding: 0 }}
+        >
           <svg
             width="48"
             height="48"
@@ -152,7 +158,7 @@ export function DashboardGrid({ onUpgrade }: DashboardGridProps) {
             <line x1="12" y1="8" x2="12" y2="16" />
             <line x1="8" y1="12" x2="16" y2="12" />
           </svg>
-        </div>
+        </button>
         <div className="text-center">
           <p
             className="text-base font-medium mb-1"

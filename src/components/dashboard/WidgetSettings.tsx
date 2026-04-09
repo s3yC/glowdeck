@@ -85,17 +85,11 @@ const widgetSettingsConfig: Partial<Record<WidgetType, SettingsField[]>> = {
     { key: 'sound', label: 'Sound', type: 'select', options: ['classic', 'gentle', 'digital'] },
     { key: 'label', label: 'Label', type: 'text' },
   ],
-  'wifi-usage': [
-    { key: 'pollInterval', label: 'Poll Interval (ms)', type: 'number' },
-  ],
   'cpu-usage': [
     { key: 'pollInterval', label: 'Poll Interval (ms)', type: 'number' },
     { key: 'displayMode', label: 'Display Mode', type: 'select', options: ['gauge', 'bar'] },
   ],
   'memory-usage': [
-    { key: 'pollInterval', label: 'Poll Interval (ms)', type: 'number' },
-  ],
-  'storage-usage': [
     { key: 'pollInterval', label: 'Poll Interval (ms)', type: 'number' },
   ],
   'eth-usage': [

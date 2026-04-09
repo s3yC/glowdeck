@@ -26,13 +26,13 @@ export const HEADER_HEIGHT = 48;
 
 // Widget tier arrays
 export const FREE_WIDGET_TYPES = [
-  'clock', 'date', 'calendar', 'weather', 'countdown', 'quote',
-  'alarm-clock', 'wifi-usage',
+  'clock', 'weather', 'calendar', 'date', 'countdown', 'alarm-clock',
+  'quote', 'eth-usage',
 ] as const;
 
 export const PREMIUM_WIDGET_TYPES = [
-  'youtube', 'music', 'stocks', 'photo-frame', 'pomodoro',
-  'cpu-usage', 'memory-usage', 'storage-usage', 'eth-usage',
+  'youtube', 'music', 'stocks', 'pomodoro', 'photo-frame',
+  'cpu-usage', 'memory-usage',
 ] as const;
 
 // CSP whitelist

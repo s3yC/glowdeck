@@ -3,7 +3,7 @@ import React from 'react';
 export type WidgetType =
   | 'clock' | 'date' | 'calendar' | 'weather' | 'countdown' | 'quote'
   | 'youtube' | 'music' | 'stocks' | 'photo-frame' | 'pomodoro'
-  | 'alarm-clock' | 'wifi-usage' | 'cpu-usage' | 'memory-usage' | 'storage-usage' | 'eth-usage';
+  | 'alarm-clock' | 'cpu-usage' | 'memory-usage' | 'eth-usage';
 
 export type WidgetTier = 'free' | 'premium';
 

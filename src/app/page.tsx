@@ -52,7 +52,7 @@ export default function Home() {
         <SpaceSwitcher onOpenSettings={handleOpenSettings} />
 
         {/* Dashboard grid with upgrade callback */}
-        <DashboardGrid onUpgrade={handleUpgrade} />
+        <DashboardGrid onUpgrade={handleUpgrade} onOpenSettings={handleOpenSettings} />
       </BurnInProtection>
 
       {/* Settings panel (slide-in drawer) */}

@@ -94,6 +94,10 @@ export default function YouTubeWidget({ widget, onConfigChange }: WidgetProps) {
     onConfigChange({ ...config, videoUrl: '' });
   }, [config, onConfigChange]);
 
+  const handleToggleLoop = useCallback(() => {
+    onConfigChange({ ...config, loop: !config.loop });
+  }, [config, onConfigChange]);
+
   /* ---- URL input screen ---- */
   if (!videoId) {
     return (
@@ -211,18 +215,48 @@ export default function YouTubeWidget({ widget, onConfigChange }: WidgetProps) {
         </button>
       )}
 
-      {/* Change video button (top-right) */}
-      <button
-        onClick={handleClear}
-        className="absolute top-2 right-2 z-20 rounded-full p-1.5 opacity-0 hover:opacity-100 transition-opacity"
-        style={{ background: 'rgba(0,0,0,0.6)' }}
-        aria-label="Change video"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
+      {/* Top-right controls */}
+      <div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 opacity-0 hover:opacity-100 transition-opacity">
+        {/* Loop toggle */}
+        <button
+          onClick={handleToggleLoop}
+          className="rounded-full p-1.5 transition-colors"
+          style={{
+            background: config.loop ? 'rgba(99,102,241,0.85)' : 'rgba(0,0,0,0.6)',
+          }}
+          aria-label={config.loop ? 'Disable loop' : 'Enable loop'}
+          title={config.loop ? 'Loop on' : 'Loop off'}
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="17 1 21 5 17 9" />
+            <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+            <polyline points="7 23 3 19 7 15" />
+            <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+          </svg>
+        </button>
+
+        {/* Change video */}
+        <button
+          onClick={handleClear}
+          className="rounded-full p-1.5"
+          style={{ background: 'rgba(0,0,0,0.6)' }}
+          aria-label="Change video"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }

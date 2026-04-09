@@ -19,8 +19,6 @@ function getBenefitText(widgetType: WidgetType): string {
     pomodoro: 'Stay focused with timed work sessions',
     'cpu-usage': 'Monitor CPU utilization in real-time',
     'memory-usage': 'Track JavaScript heap memory usage',
-    'storage-usage': 'View browser storage quota and usage',
-    'eth-usage': 'Monitor network throughput and requests',
   };
   return benefits[widgetType] ?? 'Unlock this widget with GlowDeck PRO';
 }
